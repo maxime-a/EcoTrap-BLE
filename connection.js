@@ -2,7 +2,7 @@
  * @ Author: Maxime Aymonin
  * @ Create Time: 2022-07-02 12:04:08
  * @ Modified by: Maxime Aymonin
- * @ Modified time: 2022-07-13 12:05:33
+ * @ Modified time: 2022-07-13 12:11:36
  * @ Description: Connection part to the web interface to an EcoTrap
  */
 
@@ -37,7 +37,7 @@ async function connect()
     try {
     console.log('Requesting any Bluetooth Device...');
     myDevice = await navigator.bluetooth.requestDevice({
-        filters});
+        acceptAllDevices : true});
     myDevice.addEventListener('gattserverdisconnected', disconnect);
     console.log('Connecting to GATT Server...');
     const server = await myDevice.gatt.connect();
