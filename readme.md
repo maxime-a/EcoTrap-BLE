@@ -4,15 +4,3 @@ This project was developped by the EcoBelt Team.
 It is a web interface using the WebBluetooth API to an EcoTrap.
 Software is provided as is.
 
-### Documentation generation
-
-Jsdoc :
-```console
-jsdoc appli.js
-```
-    
-
-Convert to html :
-```console
-wkhtmltopdf ./out/index.html ./out/global.html doc.pdf
-```
