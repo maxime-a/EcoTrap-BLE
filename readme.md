@@ -4,7 +4,7 @@ Copyright 2022, EcoBelt, All rights reserved.
 
 This project was developped by the EcoBelt Team.
 It is a web interface using the WebBluetooth API to an EcoTrap.
-Software is provided 
+Software is provided as is.
 
 ### Documentation generation
 
