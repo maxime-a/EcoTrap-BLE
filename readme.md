@@ -1,5 +1,3 @@
-Copyright 2022, EcoBelt, All rights reserved.
-
 ### Credit
 
 This project was developped by the EcoBelt Team.
