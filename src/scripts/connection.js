@@ -81,9 +81,9 @@ async function connect()
                     characteristicSensors=characteristic;
                     break;
 
-                /* Childs counter */
+                /* AI */
                 case "00000203-0000-1000-8000-00805f9b34fb":
-                    characteristicChilds=characteristic;
+                    characteristicAI=characteristic;
                     break;
 
                 /* Calendar */

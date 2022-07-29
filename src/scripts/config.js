@@ -14,7 +14,7 @@ function dec(text)
     {
         case 'min-temp':
             if(minTemp>0)
-                minTemp-=0.1;
+                minTemp-=0.5;
             else
                 minTemp=0;
             document.getElementById("temp-min-input").value = minTemp.toFixed(1);
@@ -22,7 +22,7 @@ function dec(text)
         
         case 'max-temp':
             if(maxTemp>0)
-                maxTemp-=0.1;
+                maxTemp-=0.5;
             else
                 maxTemp=0;
             document.getElementById("temp-max-input").value = maxTemp.toFixed(1);
@@ -86,7 +86,7 @@ function inc(text)
     {
         case 'min-temp':
             if(minTemp<60)
-                minTemp+=0.1;
+                minTemp+=0.5;
             else
                 minTemp=60;
             document.getElementById("temp-min-input").value = minTemp.toFixed(1);
@@ -94,7 +94,7 @@ function inc(text)
 
         case 'max-temp':
             if(maxTemp<60)
-                maxTemp+=0.1;
+                maxTemp+=0.5;
             else
                 maxTemp=60;
             document.getElementById("temp-max-input").value = maxTemp.toFixed(1);
@@ -146,6 +146,15 @@ function inc(text)
             else
                 measurementsPeriod=360;
             document.getElementById("measurements-input").value = measurementsPeriod.toFixed(0);
+            break;
+
+          
+        case 'randomCoeff':
+            if(randomCoeffValue <10)
+                randomCoeffValue+=1;
+            else
+                randomCoeffValue=10;
+            document.getElementById("randomCoeff").value = randomCoeffValue.toFixed(1);
             break;
     }
 }

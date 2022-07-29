@@ -22,6 +22,7 @@ function onPageLoad()
     for(var i = 0; i < nodes.length; i++){
         nodes[i].disabled = true;
     }
+
 }
 window.onPageLoad = onPageLoad();
 
@@ -62,12 +63,12 @@ async function readActuators(){
 }
 
 /**
- * Read and return the childs counter caracteristic
+ * Read and return the AI caracteristic
  */
-async function readChildsCounter(){
-    var value = await characteristicChilds.readValue();
-    let childsWord = new Uint8Array(value.buffer);
-    return childsWord;
+async function readAI(){
+    var value = await characteristicAI.readValue();
+    let AIWord = new Uint8Array(value.buffer);
+    return AIWord;
 }
 
 /**
@@ -120,22 +121,50 @@ async function globalInit()
     /* Status */
     let statusWord = new Uint8Array(2);
     statusWord = await readStatus();
+    
+    console.log("---------- READ STATUS -------------");
+    console.log(statusWord[1]&0b00000011);
 
-    if(statusWord[1]&0b00000010)
+    if((statusWord[1]&0b00000011) == 3) // Mode AI
     {
-        modeState=1;
-        document.getElementById('auto-img').style.color = 'green';
-        lockers = document.getElementsByClassName("locker");
-        for(let i=0;i<lockers.length;i++){lockers[i].style.visibility='visible';}
-    }
-    else
-    {
-        modeState=0;
+        //funcModeAI();
+        modeAuto=0;
+        modeManual=0,
+        modeAI=1;
+        document.getElementById('ai-img').style.color = 'green';
+        document.getElementById('manual-img').style.color = 'var(--text-color)';
         document.getElementById('auto-img').style.color = 'var(--text-color)';
         lockers = document.getElementsByClassName("locker");
         for(let i=0;i<lockers.length;i++){lockers[i].style.visibility='hidden';}
     }
+    else if((statusWord[1]&0b00000011) == 2) // Mode AUTO
+    {
+        //funcModeAuto();
+    
+        modeAuto=1;
+        modeAI=0;
+        modeManual=0;
+        document.getElementById('auto-img').style.color = 'green';
+        document.getElementById('ai-img').style.color = 'var(--text-color)';
+        document.getElementById('manual-img').style.color = 'var(--text-color)';
+        lockers = document.getElementsByClassName("locker");
+        for(let i=0;i<lockers.length;i++){lockers[i].style.visibility='visible';}
+    }
 
+    else if((statusWord[1]&0b00000011) == 1) // Mode Manual
+    {
+        //funcModeManual();
+        
+        modeAuto=0;
+        modeManual=1,
+        modeAI=0;
+        document.getElementById('manual-img').style.color = 'green';
+        document.getElementById('ai-img').style.color = 'var(--text-color)';
+        document.getElementById('auto-img').style.color = 'var(--text-color)';
+        lockers = document.getElementsByClassName("locker");
+        for(let i=0;i<lockers.length;i++){lockers[i].style.visibility='hidden';}
+    }
+    
     /* Configs */
     console.log(">> Initializing config values")
 
@@ -162,8 +191,26 @@ async function globalInit()
     measurementsPeriod = sensorsWord[19];
     document.getElementById("measurements-input").value = measurementsPeriod;
 
+    AIWord = readAI();
+
+    prevTreshold1 = AIWord[0];
+    prevTreshold2 = AIWord[1];
+    prevTresholdON = AIWord[2];
+    prevImpactCoeff = AIWord[3];
+    prevRandomCoeff = AIWord[4];
+    quizzDemand = AIWord[5];
+
+
+    /* AI */
+    if( quizzDemand ){
+        showModal('open-modal','modal-container');
+    }
+
+
     /* Position */
     console.log(">> Updating map")
     readPosition();
+
+    
 }
 

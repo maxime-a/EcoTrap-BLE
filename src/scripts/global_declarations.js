@@ -19,14 +19,16 @@
  var characteristicCalendar;
  var characteristicPosition;
  var characteristicSensors;
- var characteristicChilds;
+ var characteristicAI;
  var characteristicGeneral;
  
  var connectionToggle;
  var fanState;
  var co2State;
  var lightState;
- var modeState;
+ var modeAuto; // Mode Auto
+ var modeAI;
+ var modeManual;
  
  var mosquitoNumber=0;
  var minTemp=18;
@@ -37,3 +39,27 @@
  var machineId=255;
  var childsCounter=0;
  var measurementsPeriod=5;
+
+ var quizzDemand = false;
+
+ var treshold1Value;
+ var treshold2Value;
+ var tresholdOnValue;
+ var minTreshold2;
+
+ var prevTreshold1;
+ var prevTreshold2;
+ var prevTresholdON;
+ var prevImpactCoeff;
+ var prevRandomCoeff;
+
+ var randomCoeffValue;
+ var impactCoeffValue;
+
+
+
+
+
+
+ 
+ 
