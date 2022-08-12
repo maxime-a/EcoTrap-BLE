@@ -221,3 +221,27 @@ async function saveConfig()
     console.log('>> Config save error ' + error);
   }
 }
+
+
+
+
+async function resetMosquitoCounter(){
+    let statusWord = new Uint8Array(2);
+
+    console.log('>> Reading status');
+    statusWord = await readStatus();
+    console.log('>> status readed');
+    console.log(statusWord);
+
+    statusWord[1] = statusWord[1] | 0b00010000;
+
+    console.log('>> Writing status caracteristic');
+    console.log(statusWord);
+    try{
+        await characteristicStatus.writeValue(statusWord);
+    }
+    catch(error){
+        console.log('/!\ Failed writing actuators caracteristic' + error);
+    }
+
+}

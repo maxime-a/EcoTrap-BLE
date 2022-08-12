@@ -35,13 +35,13 @@ async function fan()
         }
     }
 
-    console.log('>> Writing actuators caracteristic');
+    console.log('>> Writing actuators characteristic');
     console.log(actuatorsWord);
     try{
     await characteristicActuators.writeValue(actuatorsWord);
     }
     catch(error){
-    console.log('/!\ Failed writing actuators caracteristic' + error);
+    console.log('/!\ Failed writing actuators characteristic' + error);
     }
 }
 
@@ -73,13 +73,13 @@ async function co2()
         }
     }
 
-    console.log('>> Writing actuators caracteristic');
+    console.log('>> Writing actuators characteristic');
     console.log(actuatorsWord);
     try{
     await characteristicActuators.writeValue(actuatorsWord);
     }
     catch(error){
-    console.log('/!\ Failed writing actuators caracteristic' + error);
+    console.log('/!\ Failed writing actuators characteristic' + error);
     }
 }
 
@@ -111,13 +111,13 @@ async function light()
         }
     }
 
-    console.log('>> Writing actuators caracteristic');
+    console.log('>> Writing actuators characteristic');
     console.log(actuatorsWord);
     try{
     await characteristicActuators.writeValue(actuatorsWord);
     }
     catch(error){
-    console.log('/!\ Failed writing actuators caracteristic' + error);
+    console.log('/!\ Failed writing actuators characteristic' + error);
     }
 }
  
@@ -138,57 +138,48 @@ function hideLockers(){
 }
 
 /**
- * Switch to AUTO mode
+ * When the user click to switch to AUTO mode
+ * Only one mode can be active at the same time
  */
 async function funcModeAuto()
 {
-    
-
-    if(!modeAuto)
-    {
+    if(!modeAuto){
+        // we were not in the auto mode
         let statusWord = new Uint8Array(2);
-
+        // reading the current value of the characteristic
         console.log('>> Reading status');
         statusWord = await readStatus();
+        // printing it on the terminal 
         console.log('>> status readed');
         console.log(statusWord);
 
+        // changing the value of the mode variables
         modeAuto=1;
         modeAI=0;
         modeManual=0;
-
         
+        // changing the color of the icons on the screen. (green for active / gray for not active)
         document.getElementById('auto-img').style.color = 'green';
         document.getElementById('manual-img').style.color = 'var(--text-color)';
         document.getElementById('ai-img').style.color = 'var(--text-color)';
 
+        // showing small lock on the screen, because we are not in manual mode
         showLockers();
 
-        statusWord[1]= 0b11111100 & statusWord[1]; // on met les 2 LSB à 0;
-        statusWord[1]= 0b00000001 | statusWord[1]; // on passe en mode auto
+        // setting the new status characteristic to send to the mother board
+        statusWord[1]= 0b11111100 & statusWord[1]; // set the 2 LSB to 0
+        statusWord[1]= 0b00000001 | statusWord[1]; // set the auto mode combinaison, refering to the specs
 
-        console.log('>> Writing status caracteristic');
+        console.log('>> Writing status characteristic');
         console.log(statusWord);
+        // checking if the characteristic is well written
         try{
             await characteristicStatus.writeValue(statusWord);
         }
         catch(error){
-            console.log('/!\ Failed writing actuators caracteristic' + error);
+            console.log('/!\ Failed writing actuators characteristic' + error);
         }
-    }
-    else
-    {
-        console.log(" doit cliquer sur un autre mode que le mode ai ");
-        /*
-        modeAuto=0;
-        document.getElementById('auto-img').style.color = 'var(--text-color)';
-        
-        hideLockers();
-
-        statusWord[1]=0b11111101 & statusWord[1];*/
-    }
-
-   
+    }   
 }
 
 
@@ -222,13 +213,13 @@ async function funcModeAI()
         statusWord[1]= 0b11111100 & statusWord[1]; // on met les 2 LSB à 0;
         statusWord[1]= 0b00000010 | statusWord[1]; // on passe en mode ai
 
-        console.log('>> Writing status caracteristic');
+        console.log('>> Writing status characteristic');
         console.log(statusWord);
         try{
             await characteristicStatus.writeValue(statusWord);
         }
         catch(error){
-            console.log('/!\ Failed writing actuators caracteristic' + error);
+            console.log('/!\ Failed writing actuators characteristic' + error);
         }
     }
     else
@@ -276,13 +267,13 @@ async function funcModeManual()
         
         statusWord[1]= 0b11111100 & statusWord[1]; // on met les 2 LSB à 0;
 
-        console.log('>> Writing status caracteristic');
+        console.log('>> Writing status characteristic');
         console.log(statusWord);
         try{
             await characteristicStatus.writeValue(statusWord);
         }
         catch(error){
-            console.log('/!\ Failed writing actuators caracteristic' + error);
+            console.log('/!\ Failed writing actuators characteristic' + error);
         }
     }
     else

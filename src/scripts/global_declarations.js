@@ -40,7 +40,7 @@
  var childsCounter=0;
  var measurementsPeriod=5;
 
- var quizzDemand = false;
+ var quizzDemand = true;
 
  var treshold1Value;
  var treshold2Value;
