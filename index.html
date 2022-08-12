@@ -21,14 +21,10 @@
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
-
-
     <title>EcoBelt Bluetooth Toolbox</title>
 </head>
 
 <body>
-
-
     <nav class="sidebar close">
         <header>
             <div class="image-text">
@@ -390,7 +386,10 @@
                         </div>
                     </div>
                 </div>
-                <div>
+                <div class="inner-container">
+                    <button class="save-button big-btn" onclick="resetMosquitoCounter()">Reset Mosquito Counter</button>
+                </div>
+                <div class="inner-container">
                     <button class="save-button" onclick="saveConfig()">Save</button>
                 </div>
             </div>
