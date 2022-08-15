@@ -54,13 +54,10 @@ async function OKModal(){
     console.log(AIWord);
 
     if(document.getElementById("option-1").checked){
-        console.log(" ##  1  ##");
         AIWord[5]=0b00000001;
     } else if(document.getElementById("option-3").checked) {
-        console.log(" ##  3  ##");
         AIWord[5]=0b00000011;
     } else {
-        console.log(" ##  2  ##");
         AIWord[5]=0b00000010;
     }
 

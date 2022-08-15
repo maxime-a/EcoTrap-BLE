@@ -2,7 +2,7 @@
  * @ Author: Maxime Aymonin
  * @ Create Time: 2022-05-20 15:13:04
  * @ Modified by: Maxime Aymonin
- * @ Modified time: 2022-07-08 12:05:39
+ * @ Modified time: 2022-08-15 13:34:23
  * @ Description: A web interface to an EcoTrap
  */
 
@@ -82,6 +82,7 @@ async function globalInit()
     generalWord = await readGeneral();
   
     document.getElementById("networkID").innerHTML = "Network n°" + generalWord[2];
+    document.getElementById("dashboard-title").innerHTML = "Dashboard of network n°" + generalWord[2] + ", machine n°" + generalWord[3];
     document.getElementById("machineID").innerHTML = "Machine n°" + generalWord[3];
 
     let actuatorsWord = new Uint8Array(6);

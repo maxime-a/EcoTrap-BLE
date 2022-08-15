@@ -2,7 +2,7 @@
  * @ Author: Maxime Aymonin
  * @ Create Time: 2022-07-02 11:56:55
  * @ Modified by: Maxime Aymonin
- * @ Modified time: 2022-07-08 11:04:46
+ * @ Modified time: 2022-08-15 12:12:34
  * @ Description: Global declarations for the web interface to an EcoTrap
  */
 
@@ -13,11 +13,14 @@
  var GeneralService      = 0x0100; 
  var ConfigService       = 0x0200;       
  var MeasurementsService = 0x0300;
+ var InfoService         = 0x0400;
  
  var characteristicStatus;
  var characteristicActuators;
  var characteristicCalendar;
  var characteristicPosition;
+ var characteristicSSID;
+ var characteristicPassword;
  var characteristicSensors;
  var characteristicAI;
  var characteristicGeneral;
@@ -40,7 +43,7 @@
  var childsCounter=0;
  var measurementsPeriod=5;
 
- var quizzDemand = true;
+ var quizzDemand = false;
 
  var treshold1Value;
  var treshold2Value;

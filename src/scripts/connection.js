@@ -2,7 +2,7 @@
  * @ Author: Maxime Aymonin
  * @ Create Time: 2022-07-02 12:04:08
  * @ Modified by: Maxime Aymonin
- * @ Modified time: 2022-07-08 10:57:19
+ * @ Modified time: 2022-08-15 12:12:13
  * @ Description: Connection part to the web interface to an EcoTrap
  */
 
@@ -32,7 +32,7 @@ async function connect()
 
     document.getElementById('connection-text').innerHTML = "Connecting...";
 
-    let servicesNeeded = [GeneralService,MeasurementsService,ConfigService];
+    let servicesNeeded = [GeneralService,MeasurementsService,ConfigService,InfoService];
 
     try {
     console.log('Requesting any Bluetooth Device...');
@@ -96,10 +96,27 @@ async function connect()
                     characteristicPosition=characteristic;
                     break;
 
+                /* Position */
+                case "00000206-0000-1000-8000-00805f9b34fb":
+                    characteristicSSID=characteristic;
+                    break;
+
+                /* Position */
+                case "00000207-0000-1000-8000-00805f9b34fb":
+                    characteristicPassword=characteristic;
+                    break;
+
                 /* Measurements */
                 case "00000301-0000-1000-8000-00805f9b34fb":
                     characteristic.startNotifications();
                     characteristic.oncharacteristicvaluechanged = handleDataMeasurements;
+                    break;
+                
+                /* Alerts */
+                case "00000401-0000-1000-8000-00805f9b34fb":
+                    console.log("HELLLLLLO");
+                    characteristic.startNotifications();
+                    characteristic.oncharacteristicvaluechanged = handleDataAlerts;
                     break;
             }
         });

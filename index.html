@@ -2,7 +2,7 @@
  * @ Author: Maxime Aymonin
  * @ Create Time: 2022-02-17 21:53:25
  * @ Modified by: Maxime Aymonin
- * @ Modified time: 2022-07-08 12:07:13
+ * @ Modified time: 2022-08-15 13:28:53
  * @ Description: User interface to bluetooth EcoTrap
  -->
 
@@ -20,6 +20,8 @@
     
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon" href="ressources/Favicon_SmarTrap.ico">
+
 
     <title>EcoBelt Bluetooth Toolbox</title>
 </head>
@@ -62,7 +64,7 @@
                     <li class="nav-link">
                         <a href="#measurements">
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
-                            <span class="text nav-text">Measurements</span>
+                            <span class="text nav-text">Online</span>
                         </a>
                     </li>
 
@@ -215,7 +217,7 @@
         </section>
 
         <section class="blocks" id="dashboard">
-            <div class="text">Dashboard</div>
+            <div class="text" id="dashboard-title">Dashboard</div>
 
             <div class="horizontal-container measurements">
                 <div id="temperature">
@@ -282,14 +284,21 @@
 
             <div class="block-footer horizontal-container">
                 <span id="machineID" class="btn-text">Machine n°?</span>
+                <span id="voltage-value" class="btn-text">Voltage ??.?V</span>
                 <span id="networkID" class="btn-text">Network n°?</span>
             </div>
         </section>
 
 
         <section class="blocks" id="measurements">
-            <div class="text">Measurements</div>
-
+            <div class="text">Online</div>
+            <div class="inner-container horizontal-container">
+                <div class="">
+                    <input type="text" id="ssid">SSID</input>
+                    <input type="password" id="password">Password</input>
+                </div>
+                <button class="save-button" onclick="saveOnline()">Save</button>
+            </div>
 
         </section>
 
@@ -388,8 +397,6 @@
                 </div>
                 <div class="inner-container">
                     <button class="save-button big-btn" onclick="resetMosquitoCounter()">Reset Mosquito Counter</button>
-                </div>
-                <div class="inner-container">
                     <button class="save-button" onclick="saveConfig()">Save</button>
                 </div>
             </div>
@@ -759,8 +766,25 @@
                 </div>
             </div>
         </section>
+
+
+
+
         <section class="blocks" id="alerts">
             <div class="text">Alerts</div>
+
+            <div class="alerts-container">
+                <div class="alerts-text" id = "deadTrap">  </div>
+            </div>
+            <div class="alerts-container">
+                <div class="alerts-text" id = "deadCo2">  </div>
+            </div>
+            <div class="alerts-container">
+                <div class="alerts-text" id = "deadBat">  </div>
+            </div>
+            <div class="alerts-container">
+                <div class="alerts-text" id = "deadFan">  </div>
+            </div>
         </section>
     
     </main>
@@ -791,12 +815,14 @@
 
     <script type="text/javascript" src="src/scripts/global_declarations.js"></script>
     <script type="text/javascript" src="src/scripts/AI.js"></script>
+    <script type="text/javascript" src="src/scripts/alerts.js"></script>
     <script type="text/javascript" src="src/scripts/appli.js"></script>
     <script type="text/javascript" src="src/scripts/connection.js"></script>
     <script type="text/javascript" src="src/scripts/dashboard.js"></script>
     <script type="text/javascript" src="src/scripts/config.js"></script>
     <script type="text/javascript" src="src/scripts/alarms.js"></script>
     <script type="text/javascript" src="src/scripts/position.js"></script>
+    <script type="text/javascript" src="src/scripts/online.js"></script>
     
 
 </body>

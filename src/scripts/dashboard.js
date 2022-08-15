@@ -2,7 +2,7 @@
  * @ Author: Maxime Aymonin
  * @ Create Time: 2022-07-02 12:01:52
  * @ Modified by: Maxime Aymonin
- * @ Modified time: 2022-07-02 12:03:40
+ * @ Modified time: 2022-08-15 11:56:05
  * @ Description: Dashboard part of the web interface to an EcoTrap
  */
 
@@ -305,10 +305,12 @@ function handleDataMeasurements(event) {
     // debug trace
     console.log(">> Measurements data received : ")
     // convert bytes to corresponding values
+    voltage = (buf[15]*255+buf[16])/1000;
     temperature = (buf[17]*255+buf[18])/10;
     humidity = buf[19];
     mosquito = buf[12];
     // update UI
+    document.getElementById('voltage-value').innerHTML  =   'Voltage ' + voltage.toFixed(1).toString() + 'V';
     document.getElementById('temperature-value').innerHTML  =   temperature.toFixed(1).toString() + '°C';
     document.getElementById('humidity-value').innerHTML     =   humidity.toString() + '%';
     document.getElementById('mosquitoes-value').innerHTML   =   mosquito.toString();

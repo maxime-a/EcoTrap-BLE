@@ -2,7 +2,7 @@
  * @ Author: Maxime Aymonin
  * @ Create Time: 2022-02-17 21:53:25
  * @ Modified by: Maxime Aymonin
- * @ Modified time: 2022-07-08 10:38:33
+ * @ Modified time: 2022-08-15 11:55:31
  * @ Description: EcoTrap web interface main stylesheet
  */
 
@@ -481,6 +481,7 @@ input::-webkit-inner-spin-button {
     height: 2em;
     color: var(--text-color);
     background-color: var(--toggle-color);
+    margin: 5px;
 }
 
 .big-btn{
@@ -495,6 +496,7 @@ input::-webkit-inner-spin-button {
 .save-button:active{
     width:9em;
     height:1.8em;
+    
 }
 
 .big-btn:active{
@@ -958,5 +960,27 @@ input[type="radio"] {
 #option-2:checked:checked ~ .option-2 span,
 #option-3:checked:checked ~ .option-3 span {
   color: #fff;
+}
+
+
+
+
+
+/* ALERTS */
+
+
+.alerts-container{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  justify-items: center;
+  margin-bottom: 0px;
+}
+
+.alerts-text{
+  font-size: 17px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 1;
 }
 
