@@ -80,6 +80,20 @@ async function readAI(){
     return AIWord;
 }
 
+/** 
+ * Convert an bcd interger to two digit string
+ */
+function BCD2str(number){
+    if(number<10)
+    {
+        return '0'+number.toString(16)
+    }
+    else
+    {
+        return number.toString(16)
+    }
+}
+
 /**
  * Initialise the text , color, etc... with the values readed just after connection
  */
@@ -185,14 +199,14 @@ async function globalInit()
     alarm1_start_minute = calendarWord[19];
     alarm1_start_second = calendarWord[20];
 
-    document.getElementById('start1').value = String(alarm1_start_hour) + ':' + String(alarm1_start_hour) + ':' + String(alarm1_start_second);
+    document.getElementById('start1').value = BCD2str(alarm1_start_hour) + ':' + BCD2str(alarm1_start_minute) + ':' + BCD2str(alarm1_start_second);
 
     alarm1_end_week_day = calendarWord[24];
     alarm1_end_hour =   calendarWord[25];
     alarm1_end_minute = calendarWord[26];
     alarm1_end_second = calendarWord[27];
 
-    document.getElementById('end1').value = String(alarm1_end_hour) + ':' + String(alarm1_end_hour) + ':' + String(alarm1_end_second);
+    document.getElementById('end1').value = BCD2str(alarm1_end_hour) + ':' + BCD2str(alarm1_end_minute) + ':' + BCD2str(alarm1_end_second);
 
     //Days of alarm1
     if(alarm1_start_week_day & 0b0000001)
@@ -230,14 +244,14 @@ async function globalInit()
     alarm2_start_minute = calendarWord[33];
     alarm2_start_second = calendarWord[34];
 
-    document.getElementById('start2').value = alarm2_start_hour.toString(16) + ':' + alarm2_start_hour.toString(16) + ':' + alarm2_start_second.toString(16);
+    document.getElementById('start2').value = BCD2str(alarm2_start_hour) + ':' + BCD2str(alarm2_start_minute) + ':' + BCD2str(alarm2_start_second);
 
     alarm2_end_week_day = calendarWord[38];
     alarm2_end_hour =   calendarWord[39];
     alarm2_end_minute = calendarWord[40];
     alarm2_end_second = calendarWord[41];
 
-    document.getElementById('end2').value = alarm2_end_hour.toString(16) + ':' + alarm2_end_hour.toString(16) + ':' + alarm2_end_second.toString(16);
+    document.getElementById('end2').value = BCD2str(alarm2_end_hour) + ':' + BCD2str(alarm2_end_minute) + ':' + BCD2str(alarm2_end_second);
     
     //Days of alarm2
     if(alarm2_start_week_day & 0b0000001)
