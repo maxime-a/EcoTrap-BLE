@@ -54,6 +54,15 @@ async function readActuators(){
 }
 
 /**
+ * Read and return the calendar caracteristic
+ */
+ async function readCalendar(){
+    var value = await characteristicCalendar.readValue();
+    let calendarWord = new Uint8Array(value.buffer);
+    return calendarWord;
+}
+
+/**
  * Read and return the sensors caracteristic
  */
  async function readSensors(){
@@ -166,6 +175,100 @@ async function globalInit()
         for(let i=0;i<lockers.length;i++){lockers[i].style.visibility='hidden';}
     }
     
+    /* Init calendar */
+    let calendarWord = new Uint8Array(6);
+    calendarWord = await readCalendar();
+
+    //Times of alarm1
+    alarm1_start_week_day = calendarWord[17];
+    alarm1_start_hour =   calendarWord[18];
+    alarm1_start_minute = calendarWord[19];
+    alarm1_start_second = calendarWord[20];
+
+    document.getElementById('start1').value = String(alarm1_start_hour) + ':' + String(alarm1_start_hour) + ':' + String(alarm1_start_second);
+
+    alarm1_end_week_day = calendarWord[24];
+    alarm1_end_hour =   calendarWord[25];
+    alarm1_end_minute = calendarWord[26];
+    alarm1_end_second = calendarWord[27];
+
+    document.getElementById('end1').value = String(alarm1_end_hour) + ':' + String(alarm1_end_hour) + ':' + String(alarm1_end_second);
+
+    //Days of alarm1
+    if(alarm1_start_week_day & 0b0000001)
+    {
+        document.getElementById('mon1').checked=true;
+    }
+    if(alarm1_start_week_day & 0b0000010)
+    {
+        document.getElementById('tue1').checked=true;
+    }
+    if(alarm1_start_week_day & 0b0000100)
+    {
+        document.getElementById('wed1').checked=true;
+    }
+    if(alarm1_start_week_day & 0b0001000)
+    {
+        document.getElementById('thu1').checked=true;
+    }
+    if(alarm1_start_week_day & 0b0010000)
+    {
+        document.getElementById('fri1').checked=true;
+    }
+    if(alarm1_start_week_day & 0b0100000)
+    {
+        document.getElementById('sat1').checked=true;
+    }
+    if(alarm1_start_week_day & 0b1000000)
+    {
+        document.getElementById('sun1').checked=true;
+    }
+
+    //Times of alarm2
+    alarm2_start_week_day = calendarWord[31];
+    alarm2_start_hour =   calendarWord[32];
+    alarm2_start_minute = calendarWord[33];
+    alarm2_start_second = calendarWord[34];
+
+    document.getElementById('start2').value = alarm2_start_hour.toString(16) + ':' + alarm2_start_hour.toString(16) + ':' + alarm2_start_second.toString(16);
+
+    alarm2_end_week_day = calendarWord[38];
+    alarm2_end_hour =   calendarWord[39];
+    alarm2_end_minute = calendarWord[40];
+    alarm2_end_second = calendarWord[41];
+
+    document.getElementById('end2').value = alarm2_end_hour.toString(16) + ':' + alarm2_end_hour.toString(16) + ':' + alarm2_end_second.toString(16);
+    
+    //Days of alarm2
+    if(alarm2_start_week_day & 0b0000001)
+    {
+        document.getElementById('mon2').checked=true;
+    }
+    if(alarm2_start_week_day & 0b0000010)
+    {
+        document.getElementById('tue2').checked=true;
+    }
+    if(alarm2_start_week_day & 0b0000100)
+    {
+        document.getElementById('wed2').checked=true;
+    }
+    if(alarm2_start_week_day & 0b0001000)
+    {
+        document.getElementById('thu2').checked=true;
+    }
+    if(alarm2_start_week_day & 0b0010000)
+    {
+        document.getElementById('fri2').checked=true;
+    }
+    if(alarm2_start_week_day & 0b0100000)
+    {
+        document.getElementById('sat2').checked=true;
+    }
+    if(alarm2_start_week_day & 0b1000000)
+    {
+        document.getElementById('sun2').checked=true;
+    }
+
     /* Configs */
     console.log(">> Initializing config values")
 
