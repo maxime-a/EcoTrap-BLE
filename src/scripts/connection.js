@@ -6,6 +6,10 @@
  * @ Description: Connection part to the web interface to an EcoTrap
  */
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 /**
  * On connection button click toggle between connection and disconnection
  */
@@ -69,6 +73,7 @@ async function connect()
                 /* Actuators notif */
                 case "00000103-0000-1000-8000-00805f9b34fb":
                     characteristic.startNotifications();
+                    sleep(500);
                     characteristic.oncharacteristicvaluechanged = handleActuatorsNotif;
                     break;
                 /* General */
@@ -109,6 +114,7 @@ async function connect()
                 /* Measurements */
                 case "00000301-0000-1000-8000-00805f9b34fb":
                     characteristic.startNotifications();
+                    sleep(500);
                     characteristic.oncharacteristicvaluechanged = handleDataMeasurements;
                     break;
                 
@@ -116,6 +122,7 @@ async function connect()
                 case "00000401-0000-1000-8000-00805f9b34fb":
                     console.log("HELLLLLLO");
                     characteristic.startNotifications();
+                    sleep(500);
                     characteristic.oncharacteristicvaluechanged = handleDataAlerts;
                     break;
             }

@@ -84,52 +84,6 @@ function alarmsValid(startAlarm1,endAlarm1,startAlarm2,endAlarm2)
 }
 
 /**
- * Enable graphical components of alarm1
- */
-function setAlarm1()
-{
-    if(document.getElementById("setAlarm1").checked)
-    {
-        // This will enable all the children of the div
-        var nodes = document.getElementById("alarm1div").getElementsByTagName('*');
-        for(var i = 0; i < nodes.length; i++){
-            nodes[i].disabled = false;
-        }
-    }
-    else
-    {
-        // This will disable all the children of the div
-        var nodes = document.getElementById("alarm1div").getElementsByTagName('*');
-        for(var i = 0; i < nodes.length; i++){
-            nodes[i].disabled = true;
-        }
-    }
-}
-
-/**
- * Enable graphical components of alarm2
- */
-function setAlarm2()
-{
-    if(document.getElementById("setAlarm2").checked)
-    {
-        // This will enable all the children of the div
-        var nodes = document.getElementById("alarm2div").getElementsByTagName('*');
-        for(var i = 0; i < nodes.length; i++){
-            nodes[i].disabled = false;
-        }
-    }
-    else
-    {
-        // This will disable all the children of the div
-        var nodes = document.getElementById("alarm2div").getElementsByTagName('*');
-        for(var i = 0; i < nodes.length; i++){
-            nodes[i].disabled = true;
-        }
-    }
-}
-
-/**
  * Write in the calendar caracteristic the configured alarms
  */
 async function setTimes() 
@@ -177,10 +131,15 @@ async function setTimes()
     }
 
     /* Setting alarm 1 values */
-    if(document.getElementById('setAlarm1').checked)
+    if(document.getElementById('alarm1Switch').checked)
     {
-        if(document.getElementById('alarm1Switch').checked)
-        {
+        calendarWord[14] = 1;
+    }
+    else
+    {
+        calendarWord[14] = 0;
+    }
+
         start1_hours = parseInt(start1.substring(0,2),16);
         start1_minutes = parseInt(start1.substring(3,5),16);
         start1_seconds = parseInt(start1.substring(6),16);
@@ -190,52 +149,42 @@ async function setTimes()
         end1_minutes = parseInt(end1.substring(3,5),16);
         end1_seconds = parseInt(end1.substring(6),16);
 
-        if(document.getElementById('mon1').checked)
-        {
-            start1_days+=1;
-            alarm1days.mon=true;
-        }
-        if(document.getElementById('tue1').checked)
-        {
-            start1_days+=2;
-            alarm1days.tue=true;
-        }
-        if(document.getElementById('wed1').checked)
-        {
-            start1_days+=4;
-            alarm1days.wed=true;
-        }
-        if(document.getElementById('thu1').checked)
-        {
-            start1_days+=8;
-            alarm1days.thu=true;
-        }
-        if(document.getElementById('fri1').checked)
-        {
-            start1_days+=16;
-            alarm1days.fri=true;
-        }
-        if(document.getElementById('sat1').checked)
-        {
-            start1_days+=32;
-            alarm1days.sat=true;
-        }
-        if(document.getElementById('sun1').checked)
-        {
-            start1_days+=64;
-            alarm1days.sun=true;
-        }
-        }
-        else
-        {
-        start1_hours = 255;
-        end1_hours = 255;
-        start1_minutes = 255;
-        end1_minutes = 255;
-        start1_seconds = 255;
-        end1_seconds = 255;
-        }
+    if(document.getElementById('mon1').checked)
+    {
+        start1_days+=1;
+        alarm1days.mon=true;
     }
+    if(document.getElementById('tue1').checked)
+    {
+        start1_days+=2;
+        alarm1days.tue=true;
+    }
+    if(document.getElementById('wed1').checked)
+    {
+        start1_days+=4;
+        alarm1days.wed=true;
+    }
+    if(document.getElementById('thu1').checked)
+    {
+        start1_days+=8;
+        alarm1days.thu=true;
+    }
+    if(document.getElementById('fri1').checked)
+    {
+        start1_days+=16;
+        alarm1days.fri=true;
+    }
+    if(document.getElementById('sat1').checked)
+    {
+        start1_days+=32;
+        alarm1days.sat=true;
+    }
+    if(document.getElementById('sun1').checked)
+    {
+        start1_days+=64;
+        alarm1days.sun=true;
+    }
+
     // Alarm 2
     var start2 = document.getElementById('start2').value;
 
@@ -250,64 +199,58 @@ async function setTimes()
     }
 
     /* Setting alarm 2 values */
-    if(document.getElementById('setAlarm2').checked)
+    if(document.getElementById('alarm2Switch').checked)
     {
-        if(document.getElementById('alarm2Switch').checked)
-        {
-        start2_hours = parseInt(start2.substring(0,2),16);
-        start2_minutes = parseInt(start2.substring(3,5),16);
-        start2_seconds = parseInt(start2.substring(6),16);
+        calendarWord[28] = 1;
+    }
+    else
+    {
+        calendarWord[28] = 0;
+    }
 
-        var end2 = document.getElementById('end2').value;
-        end2_hours = parseInt(end2.substring(0,2),16);
-        end2_minutes = parseInt(end2.substring(3,5),16);
-        end2_seconds = parseInt(end2.substring(6),16);
+    start2_hours = parseInt(start2.substring(0,2),16);
+    start2_minutes = parseInt(start2.substring(3,5),16);
+    start2_seconds = parseInt(start2.substring(6),16);
 
-        if(document.getElementById('mon2').checked)
-        {
-            start2_days+=1;
-            alarm2days.mon=true;
-        }
-        if(document.getElementById('tue2').checked)
-        {
-            start2_days+=2;
-            alarm2days.tue=true;
-        }
-        if(document.getElementById('wed2').checked)
-        {
-            start2_days+=4;
-            alarm2days.wed=true;
-        }
-        if(document.getElementById('thu2').checked)
-        {
-            start2_days+=8;
-            alarm2days.thu=true;
-        }
-        if(document.getElementById('fri2').checked)
-        {
-            start2_days+=16;
-            alarm2days.fri=true;
-        }
-        if(document.getElementById('sat2').checked)
-        {
-            start2_days+=32;
-            alarm2days.sat=true;
-        }
-        if(document.getElementById('sun2').checked)
-        {
-            start2_days+=64;
-            alarm2days.sun=true;
-        }
-        }
-        else
-        {
-        start2_hours = 255;
-        end2_hours = 255;
-        start2_minutes = 255;
-        end2_minutes = 255;
-        start2_seconds = 255;
-        end2_seconds = 255;
-        }
+    var end2 = document.getElementById('end2').value;
+    end2_hours = parseInt(end2.substring(0,2),16);
+    end2_minutes = parseInt(end2.substring(3,5),16);
+    end2_seconds = parseInt(end2.substring(6),16);
+
+    if(document.getElementById('mon2').checked)
+    {
+        start2_days+=1;
+        alarm2days.mon=true;
+    }
+    if(document.getElementById('tue2').checked)
+    {
+        start2_days+=2;
+        alarm2days.tue=true;
+    }
+    if(document.getElementById('wed2').checked)
+    {
+        start2_days+=4;
+        alarm2days.wed=true;
+    }
+    if(document.getElementById('thu2').checked)
+    {
+        start2_days+=8;
+        alarm2days.thu=true;
+    }
+    if(document.getElementById('fri2').checked)
+    {
+        start2_days+=16;
+        alarm2days.fri=true;
+    }
+    if(document.getElementById('sat2').checked)
+    {
+        start2_days+=32;
+        alarm2days.sat=true;
+    }
+    if(document.getElementById('sun2').checked)
+    {
+        start2_days+=64;
+        alarm2days.sun=true;
     }
 
     var startAlarm1 = {
@@ -336,22 +279,10 @@ async function setTimes()
         s:end2_seconds
     }
 
-    alarm1Enabled = document.getElementById('setAlarm1').checked;
-    alarm2Enabled = document.getElementById('setAlarm2').checked;
+    alarm1Enabled = document.getElementById('alarm1Switch').checked;
+    alarm2Enabled = document.getElementById('alarm2Switch').checked;
 
-    if(!alarm1Enabled)
-    {
-        console.log(">> No changes to alarm 1")
-        calendarWord[17] = 0;
-        calendarWord[18] = 0;
-        calendarWord[19] = 0;
-        calendarWord[20] = 0;
-
-        calendarWord[25] = 0;
-        calendarWord[26] = 0;
-        calendarWord[27] = 0;
-    }
-    else if(alarmTimesValid(startAlarm1,endAlarm1))
+    if(alarmTimesValid(startAlarm1,endAlarm1))
     {
         if(alarmsValid(startAlarm1,endAlarm1,startAlarm2,endAlarm2) || !alarm2Enabled)
         {
@@ -372,29 +303,10 @@ async function setTimes()
     else
     {
         console.log(">> Alarm 1 is not valid. Disabling alarm 1");
-        calendarWord[18] = 255;
-        calendarWord[19] = 255;
-        calendarWord[20] = 255;
-        calendarWord[17] = 255;
-
-        calendarWord[25] = 255;
-        calendarWord[26] = 255;
-        calendarWord[27] = 255;
+        calendarWord[14] = 0;
     }
 
-    if(!alarm2Enabled)
-    {
-        console.log(">> No changes to alarm 2")
-        calendarWord[31] = 0;
-        calendarWord[32] = 0;
-        calendarWord[33] = 0;
-        calendarWord[34] = 0;
-
-        calendarWord[39] = 0;
-        calendarWord[40] = 0;
-        calendarWord[41] = 0;
-    }
-    else if(alarmTimesValid(startAlarm2,endAlarm2))
+    if(alarmTimesValid(startAlarm2,endAlarm2))
     {
         if(alarmsValid(startAlarm1,endAlarm1,startAlarm2,endAlarm2) || !alarm1Enabled)
         {
@@ -411,14 +323,7 @@ async function setTimes()
     else
     {
         console.log(">> Alarm 2 is not valid. Disabling alarm 2");
-        calendarWord[31] = 255;
-        calendarWord[32] = 255;
-        calendarWord[33] = 255;
-        calendarWord[34] = 255;
-
-        calendarWord[39] = 255;
-        calendarWord[40] = 255;
-        calendarWord[41] = 255;
+        calendarWord[28] = 0;
     }
 
     console.log(">> Writing on calendar caracteristic...");

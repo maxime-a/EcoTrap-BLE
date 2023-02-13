@@ -10,19 +10,6 @@
 function onPageLoad()
 {
     console.log(">> Initializing html components")
-
-    // This will disable all the children of the div
-    var nodes = document.getElementById("alarm1div").getElementsByTagName('*');
-    for(var i = 0; i < nodes.length; i++){
-        nodes[i].disabled = true;
-    }
-
-    // This will disable all the children of the div
-    var nodes = document.getElementById("alarm2div").getElementsByTagName('*');
-    for(var i = 0; i < nodes.length; i++){
-        nodes[i].disabled = true;
-    }
-
 }
 window.onPageLoad = onPageLoad();
 
@@ -192,6 +179,20 @@ async function globalInit()
     /* Init calendar */
     let calendarWord = new Uint8Array(6);
     calendarWord = await readCalendar();
+
+    //Alarm1 state
+    alarm1_state = calendarWord[14]
+    if(alarm1_state)
+    {
+        document.getElementById('alarm1Switch').checked = true
+    }
+
+    //Alarm2 state
+    alarm2_state = calendarWord[28]
+    if(alarm2_state)
+    {
+        document.getElementById('alarm2Switch').checked = true
+    }
 
     //Times of alarm1
     alarm1_start_week_day = calendarWord[17];
